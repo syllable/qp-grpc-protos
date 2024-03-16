@@ -1,0 +1,26 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.qpalym.grpc;
+
+import "google/protobuf/timestamp.proto";
+
+message GetUploadLogRequest {
+
+}
+
+message UploadLog {
+  int64 id = 1;
+  string bucketName = 2;
+  string key = 3;
+  int64 bytes = 4;
+  google.protobuf.Timestamp uploadedAt = 5;
+  int64 uploadDurationMs = 6;
+}
+
+message UploadLogResponse {
+  repeated UploadLog log = 1;
+}
+
+service UploadLogService {
+  rpc getLogs(GetUploadLogRequest) returns (UploadLogResponse);
+}

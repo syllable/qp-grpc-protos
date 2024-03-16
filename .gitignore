@@ -1,0 +1,13 @@
+.DS_Store
+
+application-local.yml
+
+target
+*.log
+.idea
+*.db
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+*.iml
