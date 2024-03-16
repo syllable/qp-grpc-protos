@@ -9,6 +9,9 @@
 
   <properties>
     <grpc.version>1.62.2</grpc.version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 
   <dependencies>
