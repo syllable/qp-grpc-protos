@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qpalym</groupId>
   <artifactId>grpc-protos</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>Archetype - grpc-protos</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/syllable/qp-grpc-protos</url>
 
   <properties>
     <grpc.version>1.62.2</grpc.version>
@@ -77,44 +77,6 @@
         </executions>
       </plugin>
 
-      <!-- release -->
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.8.2</version>
-        <configuration>
-          <altDeploymentRepository>
-            internal-staging-repository::default::file://${project.build.directory}/mvn-artifact
-          </altDeploymentRepository>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.github.github</groupId>
-        <artifactId>site-maven-plugin</artifactId>
-        <version>0.12</version>
-        <configuration>
-          <message>Maven artifacts for ${project.version}</message>
-          <noJekyll>true</noJekyll>
-          <outputDirectory>${project.build.directory}</outputDirectory>
-          <branch>refs/heads/main</branch>
-          <includes>
-            <include>**/*</include>
-          </includes>
-          <merge>true</merge>
-          <repositoryName>qp-grpc-protos</repositoryName>
-          <repositoryOwner>syllable</repositoryOwner>
-          <server>github</server>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>site</goal>
-            </goals>
-            <phase>deploy</phase>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
@@ -142,9 +104,12 @@
 
   <distributionManagement>
     <repository>
-      <id>internal-staging-repository</id>
-      <name>Temporary Staging Repository</name>
-      <url>file://${project.build.directory}/mvn-artifact</url>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/syllable/qp-grpc-protos</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
   </distributionManagement>
 </project>
