@@ -15,6 +15,7 @@ message UploadLog {
   int64 bytes = 4;
   google.protobuf.Timestamp uploadedAt = 5;
   int64 uploadDurationMs = 6;
+  string filename = 7;
 }
 
 message UploadLogResponse {
