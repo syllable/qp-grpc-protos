@@ -5,7 +5,7 @@ package com.qpalym.grpc;
 import "google/protobuf/timestamp.proto";
 
 message GetUploadLogRequest {
-
+  google.protobuf.Timestamp uploadedAfter = 1;
 }
 
 message UploadLog {
