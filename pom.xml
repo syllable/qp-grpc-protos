@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qpalym</groupId>
   <artifactId>grpc-protos</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.7</version>
   <name>Archetype - grpc-protos</name>
   <url>https://github.com/syllable/qp-grpc-protos</url>
 
   <properties>
-    <grpc.version>1.64.0</grpc.version>
+    <grpc.version>1.62.2</grpc.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
