@@ -8,6 +8,9 @@
   <url>https://github.com/syllable/qp-grpc-protos</url>
 
   <properties>
+    <!-- DO NOT UPDATE THIS. KEEP AT 1.62.2
+        UNTIL YOU KNOW HOW TO FIX CLASS NOT FOUND EXCEPTION io.grpc.InternalGlobalInterceptors
+      -->
     <grpc.version>1.62.2</grpc.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
