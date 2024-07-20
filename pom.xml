@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.qpalym</groupId>
   <artifactId>grpc-protos</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <version>0.0.5-SNAPSHOT</version>
   <name>Archetype - grpc-protos</name>
   <url>https://github.com/syllable/qp-grpc-protos</url>
 
   <properties>
-    <grpc.version>1.62.2</grpc.version>
+    <grpc.version>1.64.0</grpc.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -64,7 +64,7 @@
           </protocArtifact>
           <pluginId>grpc-java</pluginId>
           <pluginArtifact>
-            io.grpc:protoc-gen-grpc-java:1.62.2:exe:${os.detected.classifier}
+            io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
           </pluginArtifact>
         </configuration>
         <executions>
@@ -80,7 +80,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -97,7 +97,7 @@
         <configuration>
           <release>${maven.compiler.release}</release>
         </configuration>
-        <version>3.12.1</version>
+        <version>3.13.0</version>
       </plugin>
     </plugins>
   </build>
