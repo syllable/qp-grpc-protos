@@ -16,6 +16,8 @@ message UploadLog {
   google.protobuf.Timestamp uploadedAt = 5;
   int64 uploadDurationMs = 6;
   string filename = 7;
+  bool deleted = 8;
+  google.protobuf.Timestamp deleteddAt = 9;
 }
 
 message UploadLogResponse {
