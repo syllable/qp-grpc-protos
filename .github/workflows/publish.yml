@@ -18,7 +18,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Extract Project version
+        id: project
+        run: echo "PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
       - name: Publish to GitHub Packages
+        if:  ${{ !endsWith($PROJECT_VERSION, '-SNAPSHOT') }}
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
