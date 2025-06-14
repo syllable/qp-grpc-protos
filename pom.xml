@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.qpalym</groupId>
     <artifactId>grpc-protos</artifactId>
-    <version>0.0.9-SNAPSHOT</version>
+    <version>0.0.9</version>
     <name>Archetype - grpc-protos</name>
     <url>https://github.com/syllable/qp-grpc-protos</url>
 
