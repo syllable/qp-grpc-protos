@@ -8,9 +8,6 @@
     <url>https://github.com/syllable/qp-grpc-protos</url>
 
     <properties>
-        <!-- DO NOT UPDATE THIS. KEEP AT 1.62.2
-            UNTIL YOU KNOW HOW TO FIX CLASS NOT FOUND EXCEPTION io.grpc.InternalGlobalInterceptors
-          -->
         <!-- https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java -->
         <grpc.version>1.73.0</grpc.version>
 
@@ -62,13 +59,21 @@
             </extension>
         </extensions>
         <plugins>
-
             <plugin>
                 <groupId>io.github.ascopes</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
                     <protocVersion>${protobuf-java.version}</protocVersion>
+
+                    <binaryMavenPlugins>
+                        <binaryMavenPlugin>
+                            <groupId>io.grpc</groupId>
+                            <artifactId>protoc-gen-grpc-java</artifactId>
+                            <version>${grpc.version}</version>
+                            <options>@generated=omit</options>
+                        </binaryMavenPlugin>
+                    </binaryMavenPlugins>
                 </configuration>
                 <executions>
                     <execution>
