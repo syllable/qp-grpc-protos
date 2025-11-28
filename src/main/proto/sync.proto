@@ -1,0 +1,74 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.qpalym.grpc.sync;
+
+import "google/protobuf/timestamp.proto";
+
+message Sync {
+  repeated StockPrice stockPrices = 1;
+  repeated Order orders = 2;
+  repeated Stock stocks = 3;
+  repeated Currency currencies = 4;
+  repeated Fund funds = 5;
+  google.protobuf.Timestamp lastUpdateStockPrices = 6;
+  string sourceHost = 7;
+}
+
+message Order {
+  string orderDate = 1;
+  string symbol = 2;
+  string priceCHF = 3;
+  string quantity = 4;
+}
+
+message Stock {
+  string symbol = 1;
+  string beancountSymbol = 2;
+  string currency = 3;
+  string valor = 4;
+  string isin = 5;
+}
+
+message Currency {
+  string currency = 1;
+  string symbol = 2;
+}
+
+message Fund {
+  string identifier = 1;
+  string currency = 2;
+  string ter = 3;
+  string domicile = 4;
+  string isin = 5;
+  string name = 6;
+  string benchmarkIndexName = 7;
+  string distributionPolicy = 8;
+  string distributionSchedule = 9;
+  string website = 10;
+}
+
+message StockPrice {
+  string closingPrice = 1;
+  // LocalDate as ISO-8601 string (e.g. "2025-11-28")
+  string priceDate = 2;
+  string symbol = 3;
+}
+
+message LatestPricesRequest {
+}
+
+message LatestPricesResponse {
+  repeated StockPrice prices = 1;
+}
+
+service StockPriceService {
+  rpc GetLatestPrices (LatestPricesRequest) returns (LatestPricesResponse);
+}
+
+message GetSyncRequest {
+  string orderDate = 1;
+}
+
+service SyncService {
+  rpc getSync(GetSyncRequest) returns (Sync) {}
+}
