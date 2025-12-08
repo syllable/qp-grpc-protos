@@ -9,11 +9,14 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java -->
-        <grpc.version>1.73.0</grpc.version>
+        <grpc.version>1.77.0</grpc.version>
 
         <!-- should be the same verison grpc-java depends on
-         https://central.sonatype.com/artifact/io.grpc/grpc-protobuf/1.73.0/dependencies -->
-        <protobuf-java.version>3.25.5</protobuf-java.version>
+         https://central.sonatype.com/artifact/io.grpc/grpc-protobuf/1.73.0/dependencies
+
+         Do not update to v4 yet: https://github.com/grpc/grpc-java/issues/11015#issuecomment-2470827638
+         -->
+        <protobuf-java.version>3.25.8</protobuf-java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -59,10 +62,11 @@
             </extension>
         </extensions>
         <plugins>
+            <!-- https://mvnrepository.com/artifact/io.github.ascopes/protobuf-maven-plugin -->
             <plugin>
                 <groupId>io.github.ascopes</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>4.0.3</version>
                 <configuration>
                     <protocVersion>${protobuf-java.version}</protocVersion>
 
