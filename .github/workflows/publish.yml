@@ -9,7 +9,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      project_version: ${{ steps.version.outputs.project_version }}
+      is_release: ${{ steps.version.outputs.is_release }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+      - name: Extract project version
+        id: version
+        run: |
+          version=$(grep -m1 -oP '(?<=<version>)[^<]+' pom.xml)
+          echo "Project version is $version"
+          echo "project_version=$version" >> $GITHUB_OUTPUT
+          if [[ "$version" == *-SNAPSHOT ]]; then
+            echo "is_release=false" >> $GITHUB_OUTPUT
+          else
+            echo "is_release=true" >> $GITHUB_OUTPUT
+          fi
+
   publish:
+    needs: check-version
+    if: ${{ needs.check-version.outputs.is_release == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -22,12 +43,7 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'maven'
-      - name: Extract Project version
-        run: echo "project_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-      - name: Echo project version
-        run: echo "Project version is $project_version"
       - name: Publish to GitHub Packages
-        if:  ${{ !endsWith(env.project_version, '-SNAPSHOT') }}
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
