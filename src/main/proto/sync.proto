@@ -27,6 +27,7 @@ message Stock {
   string currency = 3;
   string valor = 4;
   string isin = 5;
+  string name = 6;
 }
 
 message Currency {
