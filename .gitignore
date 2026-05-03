@@ -11,3 +11,4 @@ target
 *.sqlite-wal
 
 *.iml
+tree

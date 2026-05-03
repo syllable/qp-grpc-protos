@@ -16,7 +16,7 @@
 
          Do not update to v4 yet: https://github.com/grpc/grpc-java/issues/11015#issuecomment-2470827638
          -->
-        <protobuf-java.version>3.25.8</protobuf-java.version>
+        <protobuf-java.version>3.25.9</protobuf-java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
