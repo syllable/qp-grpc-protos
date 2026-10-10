@@ -3,20 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.qpalym</groupId>
     <artifactId>grpc-protos</artifactId>
-    <version>0.0.11-SNAPSHOT</version>
+    <version>0.0.12-SNAPSHOT</version>
     <name>Archetype - grpc-protos</name>
     <url>https://github.com/syllable/qp-grpc-protos</url>
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java -->
-        <grpc.version>1.81.0</grpc.version>
+        <grpc.version>1.84.1</grpc.version>
 
-        <!-- should be the same verison grpc-java depends on
-         https://central.sonatype.com/artifact/io.grpc/grpc-protobuf/1.73.0/dependencies
-
-         Do not update to v4 yet: https://github.com/grpc/grpc-java/issues/11015#issuecomment-2470827638
-         -->
-        <protobuf-java.version>3.25.9</protobuf-java.version>
+        <!-- Source: https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+        <protobuf-java.version>4.36.2</protobuf-java.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -29,10 +25,24 @@
     </properties>
 
     <dependencies>
+        <!-- Must be declared explicitly: grpc-protobuf pulls in protobuf-java 3.x
+             transitively, and protoc 4.x gencode requires a matching 4.x runtime
+             (it emits @com.google.protobuf.Generated and a RuntimeVersion check). -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>${protobuf-java.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
             <version>${grpc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
@@ -60,18 +70,20 @@
             <plugin>
                 <groupId>io.github.ascopes</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
-                <version>4.0.3</version>
+                <version>5.1.11</version>
                 <configuration>
-                    <protocVersion>${protobuf-java.version}</protocVersion>
+                    <protoc kind="binary-maven">
+                        <version>${protobuf-java.version}</version>
+                    </protoc>
 
-                    <binaryMavenPlugins>
-                        <binaryMavenPlugin>
+                    <plugins>
+                        <plugin kind="binary-maven">
                             <groupId>io.grpc</groupId>
                             <artifactId>protoc-gen-grpc-java</artifactId>
                             <version>${grpc.version}</version>
                             <options>@generated=omit</options>
-                        </binaryMavenPlugin>
-                    </binaryMavenPlugins>
+                        </plugin>
+                    </plugins>
                 </configuration>
                 <executions>
                     <execution>
