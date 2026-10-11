@@ -26,4 +26,6 @@ message UploadLogResponse {
 
 service UploadLogService {
   rpc getLogs(GetUploadLogRequest) returns (UploadLogResponse);
+
+  rpc getLogsStream(GetUploadLogRequest) returns (stream UploadLogResponse);
 }
