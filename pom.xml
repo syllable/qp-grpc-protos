@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.qpalym</groupId>
     <artifactId>grpc-protos</artifactId>
@@ -9,7 +10,7 @@
 
     <properties>
         <!-- https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java -->
-        <grpc.version>1.84.1</grpc.version>
+        <grpc.version>1.85.0</grpc.version>
 
         <!-- Source: https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <protobuf-java.version>4.36.2</protobuf-java.version>
@@ -55,17 +56,22 @@
             <version>${grpc.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.12.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>kr.motd.maven</groupId>
-                <artifactId>os-maven-plugin</artifactId>
-                <version>1.7.1</version>
-            </extension>
-        </extensions>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.6.0</version>
+            </plugin>
+
             <!-- https://mvnrepository.com/artifact/io.github.ascopes/protobuf-maven-plugin -->
             <plugin>
                 <groupId>io.github.ascopes</groupId>
@@ -97,7 +103,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -114,7 +120,7 @@
                 <configuration>
                     <release>${maven.compiler.release}</release>
                 </configuration>
-                <version>3.13.0</version>
+                <version>3.16.0</version>
             </plugin>
         </plugins>
     </build>

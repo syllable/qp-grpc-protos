@@ -10,9 +10,11 @@ import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.protobuf.ProtoFileDescriptorSupplier;
 import io.grpc.stub.StreamObserver;
-import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.Test;
 
 /**
  * Compatibility harness for the protobuf-java 4.x + grpc-java combination.
@@ -27,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * java -cp "target/classes:target/test-classes:$(cat target/cp.txt)" VerifyCompat
  * </pre>
  */
-public class VerifyCompat {
+class VerifyCompatTest {
 
   static class Impl extends UploadLogServiceGrpc.UploadLogServiceImplBase {
     @Override
@@ -51,15 +53,14 @@ public class VerifyCompat {
 
   static void check(String label, boolean ok, Object detail) {
     System.out.println((ok ? "  PASS  " : "  FAIL  ") + label + (ok ? "" : "  -> " + detail));
-    if (!ok) {
-      failures++;
-    }
+    assertTrue(ok);
   }
 
   static int failures = 0;
 
-  public static void main(String[] args) throws Exception {
-    System.out.println("protobuf-java jar : " + com.google.protobuf.Message.class
+  @Test 
+  void testCompatability() throws Exception {
+        System.out.println("protobuf-java jar : " + com.google.protobuf.Message.class
         .getProtectionDomain().getCodeSource().getLocation());
     System.out.println("grpc-api jar      : " + io.grpc.Status.class
         .getProtectionDomain().getCodeSource().getLocation());
@@ -109,8 +110,9 @@ public class VerifyCompat {
       check("StatusProto.toStatusRuntimeException works", false, t);
     }
 
-    System.out.println();
-    System.out.println(failures == 0 ? "ALL CHECKS PASSED" : failures + " CHECK(S) FAILED");
-    System.exit(failures == 0 ? 0 : 1);
+  }
+
+  public static void main(String[] args) throws Exception {
+    new VerifyCompatTest().testCompatability();
   }
 }
